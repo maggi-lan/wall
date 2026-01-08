@@ -12,17 +12,3 @@ export function createMessage(req, res) {
         message: "Message created successfully"
     });
 }
-
-// PUT: update an existing message
-export function updateMessage(req, res) {
-    res.status(200).json({
-        message: "Message updated successfully"
-    });
-}
-
-// DELETE: delete an existing message
-export function deleteMessage(req, res) {
-    res.status(200).json({
-        message: "Message deleted successfully"
-    });
-}
