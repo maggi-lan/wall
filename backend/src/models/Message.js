@@ -1,0 +1,21 @@
+
+import mongoose from 'mongoose';
+
+// Create schema first
+const messageSchema = new mongoose.Schema(
+    {
+        content: {
+            type: String,
+            required: true,
+        },
+    },
+    {
+        timestamps: true,  // gives createdAt and updatedAt
+    }
+);
+
+// Create a model off the schema next
+const Message = mongoose.model("Message", messageSchema);
+
+// Export the model
+export default Message;

@@ -3,7 +3,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 
 import wallRouter from './routes/wallRoutes.js';
-import { connectDB } from './config/db.js';
+import connectDB from './config/db.js';
 
 // Load .env file
 dotenv.config();

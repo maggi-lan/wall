@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Connect to the database asynchronously
-export async function connectDB() {
+export default async function connectDB() {
     try {
         //fetch the database URI from environment variables
         const MONGO_URI = process.env.MONGO_URI;
@@ -16,6 +16,7 @@ export async function connectDB() {
         console.log("MongoDB connected successfully");
     }
 
+    // Error handling
     catch (error) {
         console.log(`Error connecting to MongoDB: ${error}`);
         process.exit(1);  // exit with failure
