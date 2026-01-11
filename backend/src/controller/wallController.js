@@ -23,8 +23,43 @@ export async function getAllMessages(_, res) {
 }
 
 // POST: add a new message
-export function createMessage(req, res) {
-    res.status(201).json({
-        message: "Message created successfully"
-    });
+export async function createMessage(req, res) {
+    try {
+        // Extract content from request body
+        const { content } = req.body;
+
+        // Validate the input
+        if (typeof content !== "string" || !content.trim()) {
+            return res.status(400).json({
+                message: "Content is required"
+            });
+        }
+
+        // Content length check
+        const MAX_LENGTH = 1000;
+        if (content.trim().length > MAX_LENGTH) {
+            return res.status(400).json({
+                message: "Content length exceeded",
+            });
+        }
+
+        // Create a new Message document
+        const message = new Message({
+            content: content,
+        });
+
+        // Save the new document to the collection
+        const savedMessage = await message.save();
+
+        // Send JSON response
+        res.status(201).json(savedMessage);
+    }
+
+    // Send error response
+    catch (error) {
+        console.log(`Error in createMessage controller: ${error}`);
+        res.status(500).json({
+            message: "Internal Server Error",
+        });
+    }
 }
