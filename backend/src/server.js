@@ -1,6 +1,7 @@
 
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 import wallRouter from './routes/wallRoutes.js';
 import connectDB from './config/db.js';
@@ -14,9 +15,14 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 // Middleware
-app.use(express.json());           // enable JSON body parsing
-app.use(rateLimiter);              // add rate limiter
-app.use("/api/wall", wallRouter);  // mount the api routes
+app.use(express.json());                       // enable JSON body parsing
+if (process.env.NODE_ENV === "development") {  // resolve CORS error in development
+    app.use(cors({
+        origin: "http://localhost:5173",
+    }));
+}
+app.use(rateLimiter);                          // add rate limiter
+app.use("/api/wall", wallRouter);              // mount the api routes
 
 // Connect to the MongoDB database
 connectDB().then(() => {
