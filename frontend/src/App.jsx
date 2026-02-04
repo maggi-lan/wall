@@ -4,19 +4,10 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 import { formatTime } from "./lib/utils.js";
 
-function Message(props) {
-    return (
-        <div className="message">
-            <span className="the-text">{props.message}</span>
-            <span className="timestamp">{props.timestamp}</span>
-        </div>
-    );
-}
+import Message from "./components/Message.jsx";
 
 function App() {
-    const [items, setItems] = useState([
-        { msg: "Hi this is bigfoot", timestamp: formatTime() },
-    ]);
+    const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState("");
     const [adding, setAdding] = useState(false);
