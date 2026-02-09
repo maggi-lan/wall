@@ -1,6 +1,6 @@
 import axios from "axios";
 import { LoaderIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 import Header from "./components/Header.jsx";
@@ -12,8 +12,6 @@ function App() {
     const [isRateLimited, setIsRateLimited] = useState(false);
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    const scrollRef = useRef(null);
 
     const toggleAddBox = () => setAdding((val) => !val);
 
@@ -37,13 +35,6 @@ function App() {
         fetchMessages();
     }, []);
 
-    // Scroll to bottom on initial load
-    useEffect(() => {
-        if (!loading && scrollRef.current) {
-            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-        }
-    }, [loading]);
-
     return (
         <div data-theme="retro" className="min-h-screen bg-base-100">
             <Header adding={adding} toggleAddBox={toggleAddBox} />
@@ -59,7 +50,6 @@ function App() {
 
                 {!loading && messages.length > 0 && !isRateLimited && (
                     <div
-                        ref={scrollRef}
                         className="
                             h-[70vh]
                             bg-base-200
@@ -67,7 +57,7 @@ function App() {
                             p-4
                             overflow-y-auto
                             flex
-                            flex-col-reverse
+                            flex-col
                             gap-3
                         "
                     >
@@ -85,4 +75,3 @@ function App() {
 }
 
 export default App;
-
