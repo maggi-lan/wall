@@ -1,6 +1,6 @@
 import { PlusIcon, MinusIcon } from "lucide-react";
 
-function Header({ adding, toggleAddBox }) {
+function Header({ isFormDisplayed, toggleAddBox }) {
     return (
         <header className="bg-neutral border-b border-neutral-content/10">
             <div className="mx-auto max-w-6xl p-4">
@@ -10,7 +10,7 @@ function Header({ adding, toggleAddBox }) {
                     </h1>
                     <div className="flex items-center gap-4">
                         <button onClick={toggleAddBox} className="btn btn-accent">
-                            {adding ? (
+                            {!isFormDisplayed ? (
                                 <>
                                     <PlusIcon className="size-5" />
                                     <span>Add New Message</span>

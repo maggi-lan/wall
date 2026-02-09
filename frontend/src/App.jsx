@@ -5,15 +5,16 @@ import toast from "react-hot-toast";
 
 import Header from "./components/Header.jsx";
 import MessageBlock from "./components/MessageBlock.jsx";
+import MessageForm from "./components/MessageForm.jsx";
 import RateLimitedUI from "./components/RateLimitedUI.jsx";
 
 function App() {
-    const [adding, setAdding] = useState(true);
+    const [isFormDisplayed, setIsFormDisplayed] = useState(false);
     const [isRateLimited, setIsRateLimited] = useState(false);
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const toggleAddBox = () => setAdding((val) => !val);
+    const toggleAddBox = () => setIsFormDisplayed((val) => !val);
 
     // Fetch messages on initial load
     useEffect(() => {
@@ -37,13 +38,15 @@ function App() {
 
     return (
         <div data-theme="retro" className="min-h-screen bg-base-100">
-            <Header adding={adding} toggleAddBox={toggleAddBox} />
+            <Header isFormDisplayed={isFormDisplayed} toggleAddBox={toggleAddBox} />
 
             {isRateLimited && <RateLimitedUI />}
 
-            <div className="max-w-5xl mx-auto px-4 py-6">
+            {isFormDisplayed && <MessageForm />}
+
+            <div className="max-w-5xl mx-auto p-4">
                 {loading && (
-                    <div className="h-[70vh] bg-base-200 rounded-xl flex items-center justify-center">
+                    <div className="h-[80vh] bg-base-200 rounded-xl flex items-center justify-center">
                         <LoaderIcon className="animate-spin size-10" />
                     </div>
                 )}
@@ -51,7 +54,7 @@ function App() {
                 {!loading && messages.length > 0 && !isRateLimited && (
                     <div
                         className="
-                            h-[70vh]
+                            h-[80vh]
                             bg-base-200
                             rounded-xl
                             p-4
