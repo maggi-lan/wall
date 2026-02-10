@@ -8,7 +8,7 @@ dotenv.config();
 // Connect to the database asynchronously
 export default async function connectDB() {
     try {
-        //fetch the database URI from environment variables
+        // Fetch the database URI from environment variables
         const MONGO_URI = process.env.MONGO_URI;
 
         // Connect to the database
