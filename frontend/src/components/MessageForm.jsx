@@ -33,26 +33,19 @@ function MessageForm() {
         <form
             onSubmit={handleSubmit}
             className="
-                bg-neutral/95
-                border
-                border-base-300
-                rounded-xl
-                p-4
-                mx-4
-                mt-4
+                p-2
                 flex
                 gap-3
                 items-end
             "
         >
-            <textarea
+            <input
                 className="
                     textarea
                     textarea-bordered
                     w-full
                     resize-none
                 "
-                rows={3}
                 placeholder="Write a message..."
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
@@ -68,8 +61,9 @@ function MessageForm() {
             <button
                 type="submit"
                 className="btn btn-accent"
+                disabled={submitting}
             >
-                {submitting ? "Posting" : "Send"}
+                {submitting ? "Sending" : "Send"}
             </button>
         </form>
     );

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 import Header from "./components/Header.jsx";
-import MessageForm from "./components/MessageForm.jsx";
 import RateLimitedUI from "./components/RateLimitedUI.jsx";
 import NoMessagesAvailable from "./components/NoMessagesAvailable.jsx";
 import MessageWall from "./components/MessageWall.jsx";
@@ -52,8 +51,6 @@ function App() {
         <div data-theme="retro" className="min-h-screen bg-base-100">
             <Header isFormDisplayed={isFormDisplayed} toggleAddBox={toggleAddBox} />
 
-            {isFormDisplayed && <MessageForm />}
-
             {isRateLimited && <RateLimitedUI />}
 
             <div className="max-w-5xl mx-auto p-4">
@@ -62,13 +59,13 @@ function App() {
                         <LoaderIcon className="animate-spin size-10" />
                     </div>
                 )}
-                
+
                 {!loading && messages.length === 0 && (
                     <NoMessagesAvailable />
                 )}
 
                 {!loading && messages.length > 0 && !isRateLimited && (
-                    <MessageWall messages={messages} />
+                    <MessageWall messages={messages} isFormDisplayed={isFormDisplayed} />
                 )}
             </div>
         </div>

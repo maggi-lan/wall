@@ -18,7 +18,7 @@ function Header({ isFormDisplayed, toggleAddBox }) {
                             ) : (
                                 <>
                                     <MinusIcon className="size-5" />
-                                    <span>Hide Message Box</span>
+                                    <span>Hide Message Form</span>
                                 </>
                             )}
                         </button>
