@@ -48,6 +48,7 @@ function MessageForm() {
                     textarea-bordered
                     w-full
                     resize-none
+                    text-secondary-content
                 "
                 placeholder="Write a message..."
                 value={content}
@@ -64,7 +65,7 @@ function MessageForm() {
             <button
                 type="submit"
                 className="btn btn-sm btn-circle"
-                disabled={submitting}
+                disabled={submitting || !content.trim()}
             >
                 <Send size={25} />
             </button>

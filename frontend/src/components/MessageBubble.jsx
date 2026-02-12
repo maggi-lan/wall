@@ -17,8 +17,8 @@ function MessageBubble({ message }) {
                 className="
                     w-fit
                     max-w-[80%]
-                    bg-secondary
-                    text-secondary-content
+                    bg-base-300
+                    text-base-content
                     rounded-2xl
                     px-4
                     py-2
