@@ -1,6 +1,6 @@
 import MessageForm from "./MessageForm";
 
-function NoMessagesAvailable({ isFormDisplayed }) {
+function NoMessagesAvailable({ isFormDisplayed, addMessage }) {
     return (
         <div
             className="h-[80vh] bg-base-200 rounded-xl flex flex-col"
@@ -9,7 +9,7 @@ function NoMessagesAvailable({ isFormDisplayed }) {
         >
             {isFormDisplayed && (
                 <div className="m-4">
-                    <MessageForm />
+                    <MessageForm addMessage={addMessage} />
                 </div>
             )}
 

@@ -18,6 +18,10 @@ function App() {
     // Helps for toggling the message box
     const toggleAddBox = () => setIsFormDisplayed((val) => !val);
 
+    // Helps to update the wall after user posts a message
+    const addMessage = (newMessage) => setMessages((prev) => [newMessage, ...prev]);
+
+
     // Fetch messages on initial load
     useEffect(() => {
         const fetchMessages = async () => {
@@ -62,11 +66,11 @@ function App() {
                     )}
 
                     {!loading && messages.length === 0 && (
-                        <NoMessagesAvailable isFormDisplayed={isFormDisplayed}/>
+                        <NoMessagesAvailable isFormDisplayed={isFormDisplayed} addMessage={addMessage}/>
                     )}
 
                     {!loading && messages.length > 0 && !isRateLimited && (
-                        <MessageWall messages={messages} isFormDisplayed={isFormDisplayed} />
+                        <MessageWall messages={messages} isFormDisplayed={isFormDisplayed} addMessage={addMessage}/>
                     )}
                 </div>
             )}

@@ -3,7 +3,7 @@ import { Send } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-function MessageForm() {
+function MessageForm({ addMessage }) {
     const [content, setContent] = useState("");
     const [submitting, setSubmitting] = useState(false);
 
@@ -17,8 +17,9 @@ function MessageForm() {
         try {
             setSubmitting(true);
 
-            await axios.post("http://localhost:5001/api/wall", { content });
+            const res = await axios.post("http://localhost:5001/api/wall", { content });
 
+            addMessage(res.data)
             setContent("");
         } catch (error) {
             if (error?.response?.status === 429)
