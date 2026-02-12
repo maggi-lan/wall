@@ -1,6 +1,6 @@
 import { formatTime } from "../lib/utils";
 
-function MessageBlock({ message }) {
+function MessageBubble({ message }) {
     return (
         <div
             className="
@@ -46,4 +46,4 @@ function MessageBlock({ message }) {
     );
 }
 
-export default MessageBlock;
+export default MessageBubble;

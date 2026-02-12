@@ -1,4 +1,4 @@
-import MessageBlock from "./MessageBlock.jsx";
+import MessageBubble from "./MessageBubble.jsx";
 import MessageForm from "./MessageForm.jsx";
 
 function MessageWall({ messages, isFormDisplayed }) {
@@ -7,7 +7,7 @@ function MessageWall({ messages, isFormDisplayed }) {
             {isFormDisplayed && <MessageForm />}
 
             {messages.map((message) => (
-                <MessageBlock key={message._id} message={message} />
+                <MessageBubble key={message._id} message={message} />
             ))}
         </div>
     );
