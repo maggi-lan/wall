@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Send } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -33,8 +34,10 @@ function MessageForm() {
         <form
             onSubmit={handleSubmit}
             className="
-                p-2
+                px-4
+                py-2
                 flex
+                items-center
                 gap-3
                 items-end
             "
@@ -60,10 +63,10 @@ function MessageForm() {
 
             <button
                 type="submit"
-                className="btn btn-accent"
+                className="btn btn-sm btn-circle"
                 disabled={submitting}
             >
-                {submitting ? "Sending" : "Send"}
+                <Send size={25} />
             </button>
         </form>
     );
