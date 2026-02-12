@@ -1,11 +1,14 @@
 import axios from "axios";
 import { Send } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 function MessageForm({ addMessage }) {
     const [content, setContent] = useState("");
     const [submitting, setSubmitting] = useState(false);
+    const inputRef = useRef(null);
+
+    useEffect(() => inputRef.current?.focus(), []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -51,6 +54,7 @@ function MessageForm({ addMessage }) {
                     resize-none
                     text-secondary-content
                 "
+                ref={inputRef}
                 placeholder="Write a message..."
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
