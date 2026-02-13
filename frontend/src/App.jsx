@@ -52,7 +52,7 @@ function App() {
     }, []);
 
     return (
-        <div data-theme="coffee" className="min-h-screen bg-base-100">
+        <div data-theme="dim" className="min-h-screen bg-base-100">
             <Header isFormDisplayed={isFormDisplayed} toggleAddBox={toggleAddBox} />
 
             {isRateLimited && <RateLimitedUI />}

@@ -52,7 +52,7 @@ function MessageForm({ addMessage }) {
                     textarea-bordered
                     w-full
                     resize-none
-                    text-secondary-content
+                    text-base-content
                 "
                 ref={inputRef}
                 placeholder="Write a message..."
