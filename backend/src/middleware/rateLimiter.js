@@ -1,5 +1,5 @@
 
-import rateLimit from "../config/upstash.js";
+import rateLimit from "../lib/upstash.js";
 
 // Rate limiter middleware function
 export default async function rateLimiter(req, res, next) {

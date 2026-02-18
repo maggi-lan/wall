@@ -1,12 +1,14 @@
 import axios from "axios";
 import { LoaderIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import toast from "react-hot-toast";
 
 import Header from "./components/Header.jsx";
 import RateLimitedUI from "./components/RateLimitedUI.jsx";
 import NoMessagesAvailable from "./components/NoMessagesAvailable.jsx";
 import MessageWall from "./components/MessageWall.jsx";
+
+import { connectSocket, disconnectSocket } from "./lib/socket.js";
 
 function App() {
     // Define some states
@@ -15,12 +17,14 @@ function App() {
     const [loading, setLoading] = useState(true);                   // 'true' if still waiting for initial message fetch
     const [messages, setMessages] = useState([]);                   // array containing messages (NOTE: message = { _id, content, createdAt })
 
+    // Store the socket
+    const socketRef = useRef(null);
+
     // Helps for toggling the message box
     const toggleAddBox = () => setIsFormDisplayed((val) => !val);
 
     // Helps to update the wall after user posts a message
     const addMessage = (newMessage) => setMessages((prev) => [newMessage, ...prev]);
-
 
     // Fetch messages on initial load
     useEffect(() => {
@@ -49,6 +53,9 @@ function App() {
         };
 
         fetchMessages();
+        connectSocket(socketRef);
+
+        return () => disconnectSocket(socketRef);
     }, []);
 
     return (

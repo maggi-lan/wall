@@ -4,14 +4,14 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 
 import wallRouter from './routes/wallRoutes.js';
-import connectDB from './config/db.js';
+import connectDB from './lib/db.js';
+import { app, server } from './lib/socket.js';
 import rateLimiter from './middleware/rateLimiter.js';
 
 // Load .env file
 dotenv.config();
 
-// Create an express app
-const app = express();
+// Set port number
 const PORT = process.env.PORT || 5001;
 
 // Middleware
@@ -27,7 +27,7 @@ app.use("/api/wall", wallRouter);              // mount the api routes
 // Connect to the MongoDB database
 connectDB().then(() => {
     // Start listening for requests
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
     });
 });
