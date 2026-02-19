@@ -2,6 +2,8 @@
 import Message from '../models/Message.js';
 import { Filter } from 'bad-words';
 
+import { emitNewMessage } from '../lib/socket.js';
+
 // GET: fetch all messages and return it in an array
 export async function getAllMessages(_, res) {
     try {
@@ -55,6 +57,9 @@ export async function createMessage(req, res) {
 
         // Save the new document to the collection
         const savedMessage = await message.save();
+
+        // Emit the new message to all users
+        emitNewMessage(savedMessage);
 
         // Send JSON response
         res.status(201).json(savedMessage);

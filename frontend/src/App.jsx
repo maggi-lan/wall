@@ -8,7 +8,7 @@ import RateLimitedUI from "./components/RateLimitedUI.jsx";
 import NoMessagesAvailable from "./components/NoMessagesAvailable.jsx";
 import MessageWall from "./components/MessageWall.jsx";
 
-import { connectSocket, disconnectSocket } from "./lib/socket.js";
+import { connectSocket, disconnectSocket, listenNewMessages } from "./lib/socket.js";
 
 function App() {
     // Define some states
@@ -23,10 +23,7 @@ function App() {
     // Helps for toggling the message box
     const toggleAddBox = () => setIsFormDisplayed((val) => !val);
 
-    // Helps to update the wall after user posts a message
-    const addMessage = (newMessage) => setMessages((prev) => [newMessage, ...prev]);
-
-    // Fetch messages on initial load
+    // Fetch messages and set up sockets on initial load
     useEffect(() => {
         const fetchMessages = async () => {
             try {
@@ -52,8 +49,9 @@ function App() {
             }
         };
 
-        fetchMessages();
-        connectSocket(socketRef);
+        fetchMessages();                            // fetch all messages
+        connectSocket(socketRef);                   // set up a socket connection
+        listenNewMessages(socketRef, setMessages);  // start listening for new messages
 
         return () => disconnectSocket(socketRef);
     }, []);
@@ -73,11 +71,11 @@ function App() {
                     )}
 
                     {!loading && messages.length === 0 && (
-                        <NoMessagesAvailable isFormDisplayed={isFormDisplayed} addMessage={addMessage}/>
+                        <NoMessagesAvailable isFormDisplayed={isFormDisplayed}/>
                     )}
 
                     {!loading && messages.length > 0 && !isRateLimited && (
-                        <MessageWall messages={messages} isFormDisplayed={isFormDisplayed} addMessage={addMessage}/>
+                        <MessageWall messages={messages} isFormDisplayed={isFormDisplayed}/>
                     )}
                 </div>
             )}

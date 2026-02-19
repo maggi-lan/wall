@@ -20,3 +20,11 @@ export function disconnectSocket(socketRef) {
         socketRef.current = null;
     }
 };
+
+export function listenNewMessages(socketRef, setMessages) {
+    if (socketRef.current) {
+        socketRef.current.on("new-message", (newMessage) => {
+            setMessages((prev) => [newMessage, ...prev]);
+        })
+    }
+}
