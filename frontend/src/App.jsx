@@ -28,7 +28,7 @@ function App() {
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                // Send a GET request to fetch the messages
+                // Send a GET request to fetch all messages
                 const res = await api.get("/wall");
 
                 // Update the states
@@ -45,7 +45,6 @@ function App() {
                     toast.error("Failed to load messages");
             }
             finally {
-                // Once loading is complete
                 setLoading(false);
             }
         };
@@ -54,6 +53,7 @@ function App() {
         connectSocket(socketRef);                   // set up a socket connection
         listenNewMessages(socketRef, setMessages);  // start listening for new messages
 
+        // Disconnect socket connection while unmounting
         return () => disconnectSocket(socketRef);
     }, []);
 

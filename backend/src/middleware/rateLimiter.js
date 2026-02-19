@@ -14,11 +14,9 @@ export default async function rateLimiter(req, res, next) {
             });
         }
 
-        // Continue to the next middleware if rate limit isn't exceeded
         next();
     }
 
-    // Error handling for rate limit errors
     catch (error) {
         console.log(`Rate limit error: ${error}`);
         next(error);

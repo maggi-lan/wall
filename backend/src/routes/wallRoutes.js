@@ -9,5 +9,4 @@ const wallRouter = express.Router();
 wallRouter.get("/", getAllMessages);
 wallRouter.post("/", createMessage);
 
-// Export the router object
 export default wallRouter;

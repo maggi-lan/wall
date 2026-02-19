@@ -16,7 +16,7 @@ export async function getAllMessages(_, res) {
         res.status(200).json(messages);
     }
 
-    // Send error response
+    // In case of failure, send error response
     catch (error) {
         console.log(`Error in getAllMessages controller: ${error}`);
         res.status(500).json({
@@ -37,8 +37,6 @@ export async function createMessage(req, res) {
                 message: "Content is required"
             });
         }
-
-        // Content length check
         const MAX_LENGTH = 1000;
         if (content.trim().length > MAX_LENGTH) {
             return res.status(400).json({
@@ -50,12 +48,10 @@ export async function createMessage(req, res) {
         const filter = new Filter();
         const filteredContent = filter.clean(content);
 
-        // Create a new Message document
+        // Add a new Message document to the collection
         const message = new Message({
             content: filteredContent,
         });
-
-        // Save the new document to the collection
         const savedMessage = await message.save();
 
         // Emit the new message to all users
@@ -65,7 +61,7 @@ export async function createMessage(req, res) {
         res.status(201).json(savedMessage);
     }
 
-    // Send error response
+    // In case of failure, send error response
     catch (error) {
         console.log(`Error in createMessage controller: ${error}`);
         res.status(500).json({

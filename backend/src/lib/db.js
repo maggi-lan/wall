@@ -2,8 +2,7 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
-// Load .env file
-dotenv.config();
+dotenv.config();  // load environment variables
 
 // Connect to the database asynchronously
 export default async function connectDB() {
@@ -16,9 +15,8 @@ export default async function connectDB() {
         console.log("MongoDB connected successfully");
     }
 
-    // Error handling
     catch (error) {
         console.log(`Error connecting to MongoDB: ${error}`);
-        process.exit(1);  // exit with failure
+        process.exit(1);
     }
 }
