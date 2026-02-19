@@ -1,8 +1,8 @@
 
 import { io } from "socket.io-client";
 
-// Backend URL
-const URL = "http://localhost:5001";
+// Server URL
+const URL = import.meta.env.MODE == "development" ? "http://localhost:5001" : "/"
 
 // Sets up a socket connection
 export function connectSocket(socketRef) {

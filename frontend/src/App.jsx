@@ -1,7 +1,8 @@
-import axios from "axios";
 import { LoaderIcon } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import toast from "react-hot-toast";
+
+import api from "./lib/axios.js";
 
 import Header from "./components/Header.jsx";
 import RateLimitedUI from "./components/RateLimitedUI.jsx";
@@ -28,7 +29,7 @@ function App() {
         const fetchMessages = async () => {
             try {
                 // Send a GET request to fetch the messages
-                const res = await axios.get("http://localhost:5001/api/wall");
+                const res = await api.get("/wall");
 
                 // Update the states
                 setMessages(res.data);

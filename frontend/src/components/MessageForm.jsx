@@ -1,7 +1,8 @@
-import axios from "axios";
 import { Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+
+import api from "../lib/axios";
 
 function MessageForm() {
     const [content, setContent] = useState("");
@@ -20,7 +21,7 @@ function MessageForm() {
         try {
             setSubmitting(true);
 
-            await axios.post("http://localhost:5001/api/wall", { content });
+            await api.post("/wall", { content });
 
             setContent("");
         } catch (error) {
