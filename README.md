@@ -40,8 +40,10 @@ A real-time message board equipped with basic profanity moderation. Built with M
 
 ## TODO
 
-- [x] Add rate limit
-- [x] Add profanity filter
+- [x] Implement rate limiting
+- [x] Implement profanity filtering
 - [x] Set up websockets
-- [ ] Allow users to choose nicknames
-- [ ] Allow users to update/delete their messages
+- [ ] Allow users to set custom nicknames
+- [ ] Allow users to edit or delete messages
+- [ ] Enable clickable URLs
+- [ ] Support image attachments
